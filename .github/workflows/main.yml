@@ -1,25 +1,26 @@
-name: Docker Build and Push
+name: Docker Build and Push # Name of the workflow
 
-on:
-  push:
-    branches: [ main ]
+on: # Defines when the workflow should be triggered
+  push: # Triggers the workflow on a 'push' event
+    branches: [main] # Triggers only for pushes to the 'main' branch
 
-jobs:
-  build-and-push:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Check Out Repo
-      uses: actions/checkout@v2
-    
-    - name: Log in to Docker Hub
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_PASSWORD }}
-    
-    - name: Build and Push Docker Image
-      uses: docker/build-push-action@v2
-      with:
-        context: .
-        push: true
-        tags: ramymohamed/cst8915_simple_website:latest
+jobs: # Defines the jobs to be run
+  build-and-push: # Name of the job
+    runs-on: ubuntu-latest # Specifies the type of virtual host machine to run the job
+
+    steps: # Steps to be performed in the job
+      - name: Check Out Repo # Step to check out the repository code
+        uses: actions/checkout@v2 # Uses the checkout action to check out the repository
+
+      - name: Log in to Docker Hub # Step to log in to Docker Hub
+        uses: docker/login-action@v1 # Uses the Docker login action
+        with: # Inputs for the Docker login action
+          username: ${{ secrets.DOCKERHUB_USERNAME }} # Your Docker Hub username (from GitHub secrets)
+          password: ${{ secrets.DOCKERHUB_PASSWORD }} # Your Docker Hub password (from GitHub secrets)
+
+      - name: Build and Push Docker Image # Step to build and push the Docker image
+        uses: docker/build-push-action@v2 # Uses the Docker build-and-push action
+        with: # Inputs for the build-and-push action
+          context: . # The context path for the build (usually the root of your repository)
+          push: true # Enables pushing the image to Docker Hub
+          tags: yourusername/yourrepo:latest # Tag for the Docker image to be pushed
