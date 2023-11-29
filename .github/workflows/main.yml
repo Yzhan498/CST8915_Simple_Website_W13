@@ -23,4 +23,4 @@ jobs: # Defines the jobs to be run
         with: # Inputs for the build-and-push action
           context: . # The context path for the build (usually the root of your repository)
           push: true # Enables pushing the image to Docker Hub
-          tags: yourusername/yourrepo:latest # Tag for the Docker image to be pushed
+          tags: ramymohamed/cst8915_simple_website:latest # Tag for the Docker image to be pushed
